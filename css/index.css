@@ -243,6 +243,7 @@ header .showTime {
     transform: translate(-50%, -50%) rotate(-360deg);
   }
 }
+
 /* 约束屏幕尺寸 */
 @media screen and (max-width: 1024px) {
   html {

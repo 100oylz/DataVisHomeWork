@@ -11,8 +11,6 @@ var dataArray; // 声明为全局变量
       processData(data);
       func1();
       func2();
-      // func3();
-      // func4();
       func5();
       func6();
       func7();
@@ -62,7 +60,7 @@ var dataArray; // 声明为全局变量
       return b[1] - a[1]; // 按值（出现次数）降序排序
     });
 
-    // 获取前 10 个元素
+    // 获取前 5 个元素
     var top5 = sortedData.slice(0, 5);
     var top5X = top5.map(function (item) {
       return item[0];
@@ -173,7 +171,7 @@ var dataArray; // 声明为全局变量
       return b[1] - a[1]; // 按值（出现次数）降序排序
     });
     var sum = dataArray.length;
-    // 获取前 10 个元素
+    // 获取前 5 个元素
     var top5 = sortedData.slice(0, 5);
     var top5X = top5.map(function (item) {
       return item[0];
@@ -290,338 +288,6 @@ var dataArray; // 声明为全局变量
       myChart.resize();
     });
   }
-  // 折线图1模块制作
-  function func3() {
-    var yearData = [
-      {
-        year: "2020", // 年份
-        data: [
-          // 两个数组是因为有两条线
-          [24, 40, 101, 134, 90, 230, 210, 230, 120, 230, 210, 120],
-          [40, 64, 191, 324, 290, 330, 310, 213, 180, 200, 180, 79],
-        ],
-      },
-      {
-        year: "2021", // 年份
-        data: [
-          // 两个数组是因为有两条线
-          [123, 175, 112, 197, 121, 67, 98, 21, 43, 64, 76, 38],
-          [143, 131, 165, 123, 178, 21, 82, 64, 43, 60, 19, 34],
-        ],
-      },
-    ];
-    // 1. 实例化对象
-    var myChart = echarts.init(document.querySelector(".line .chart"));
-    // 2.指定配置
-    var option = {
-      // 通过这个color修改两条线的颜色
-      color: ["#00f2f1", "#ed3f35"],
-      tooltip: {
-        trigger: "axis",
-      },
-      legend: {
-        // 如果series 对象有name 值，则 legend可以不用写data
-        // 修改图例组件 文字颜色
-        textStyle: {
-          color: "#4c9bfd",
-        },
-        // 这个10% 必须加引号
-        right: "10%",
-      },
-      grid: {
-        top: "20%",
-        left: "3%",
-        right: "4%",
-        bottom: "3%",
-        show: true, // 显示边框
-        borderColor: "#012f4a", // 边框颜色
-        containLabel: true, // 包含刻度文字在内
-      },
-
-      xAxis: {
-        type: "category",
-        boundaryGap: false,
-        data: [
-          "1月",
-          "2月",
-          "3月",
-          "4月",
-          "5月",
-          "6月",
-          "7月",
-          "8月",
-          "9月",
-          "10月",
-          "11月",
-          "12月",
-        ],
-        axisTick: {
-          show: false, // 去除刻度线
-        },
-        axisLabel: {
-          color: "#4c9bfd", // 文本颜色
-        },
-        axisLine: {
-          show: false, // 去除轴线
-        },
-      },
-      yAxis: {
-        type: "value",
-        axisTick: {
-          show: false, // 去除刻度线
-        },
-        axisLabel: {
-          color: "#4c9bfd", // 文本颜色
-        },
-        axisLine: {
-          show: false, // 去除轴线
-        },
-        splitLine: {
-          lineStyle: {
-            color: "#012f4a", // 分割线颜色
-          },
-        },
-      },
-      series: [
-        {
-          name: "新增粉丝",
-          type: "line",
-          // true 可以让我们的折线显示带有弧度
-          smooth: true,
-          data: yearData[0].data[0],
-        },
-        {
-          name: "新增游客",
-          type: "line",
-          smooth: true,
-          data: yearData[0].data[1],
-        },
-      ],
-    };
-
-    // 3. 把配置给实例对象
-    myChart.setOption(option);
-    // 4. 让图表跟随屏幕自动的去适应
-    window.addEventListener("resize", function () {
-      myChart.resize();
-    });
-
-    // 5.点击切换效果
-    $(".line h2").on("click", "a", function () {
-      // alert(1);
-      // console.log($(this).index());
-      // 点击 a 之后 根据当前a的索引号 找到对应的 yearData的相关对象
-      // console.log(yearData[$(this).index()]);
-      var obj = yearData[$(this).index()];
-      option.series[0].data = obj.data[0];
-      option.series[1].data = obj.data[1];
-      // 需要重新渲染
-      myChart.setOption(option);
-    });
-  }
-  // 折线图2 模块制作
-  function func4() {
-    var myChart = echarts.init(document.querySelector(".line2 .chart"));
-    var option = {
-      tooltip: {
-        trigger: "axis",
-      },
-      legend: {
-        top: "0%",
-        data: ["邮件营销", "联盟广告", "视频广告", "直接访问", "搜索引擎"],
-        textStyle: {
-          color: "rgba(255,255,255,.5)",
-          fontSize: "12",
-        },
-      },
-
-      grid: {
-        left: "10",
-        top: "30",
-        right: "10",
-        bottom: "10",
-        containLabel: true,
-      },
-      xAxis: [
-        {
-          type: "category",
-          boundaryGap: false,
-          // x轴更换数据
-          data: [
-            "01",
-            "02",
-            "03",
-            "04",
-            "05",
-            "06",
-            "07",
-            "08",
-            "09",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16",
-            "17",
-            "18",
-            "19",
-            "20",
-            "21",
-            "22",
-            "23",
-            "24",
-            "25",
-            "26",
-            "26",
-            "28",
-            "29",
-            "30",
-          ],
-          // 文本颜色为rgba(255,255,255,.6)  文字大小为 12
-          axisLabel: {
-            textStyle: {
-              color: "rgba(255,255,255,.6)",
-              fontSize: 12,
-            },
-          },
-          // x轴线的颜色为   rgba(255,255,255,.2)
-          axisLine: {
-            lineStyle: {
-              color: "rgba(255,255,255,.2)",
-            },
-          },
-        },
-      ],
-      yAxis: [
-        {
-          type: "value",
-          axisTick: { show: false },
-          axisLine: {
-            lineStyle: {
-              color: "rgba(255,255,255,.1)",
-            },
-          },
-          axisLabel: {
-            textStyle: {
-              color: "rgba(255,255,255,.6)",
-              fontSize: 12,
-            },
-          },
-          // 修改分割线的颜色
-          splitLine: {
-            lineStyle: {
-              color: "rgba(255,255,255,.1)",
-            },
-          },
-        },
-      ],
-      series: [
-        {
-          name: "邮件营销",
-          type: "line",
-          smooth: true,
-          // 单独修改当前线条的样式
-          lineStyle: {
-            color: "#0184d5",
-            width: "2",
-          },
-          // 填充颜色设置
-          areaStyle: {
-            color: new echarts.graphic.LinearGradient(
-              0,
-              0,
-              0,
-              1,
-              [
-                {
-                  offset: 0,
-                  color: "rgba(1, 132, 213, 0.4)", // 渐变色的起始颜色
-                },
-                {
-                  offset: 0.8,
-                  color: "rgba(1, 132, 213, 0.1)", // 渐变线的结束颜色
-                },
-              ],
-              false
-            ),
-            shadowColor: "rgba(0, 0, 0, 0.1)",
-          },
-          // 设置拐点
-          symbol: "circle",
-          // 拐点大小
-          symbolSize: 8,
-          // 开始不显示拐点， 鼠标经过显示
-          showSymbol: false,
-          // 设置拐点颜色以及边框
-          itemStyle: {
-            color: "#0184d5",
-            borderColor: "rgba(221, 220, 107, .1)",
-            borderWidth: 12,
-          },
-          data: [
-            30, 40, 30, 40, 30, 40, 30, 60, 20, 40, 30, 40, 30, 40, 30, 40, 30,
-            60, 20, 40, 30, 40, 30, 40, 30, 40, 20, 60, 50, 40,
-          ],
-        },
-        {
-          name: "联盟广告",
-          type: "line",
-          smooth: true,
-          lineStyle: {
-            normal: {
-              color: "#00d887",
-              width: 2,
-            },
-          },
-          areaStyle: {
-            normal: {
-              color: new echarts.graphic.LinearGradient(
-                0,
-                0,
-                0,
-                1,
-                [
-                  {
-                    offset: 0,
-                    color: "rgba(0, 216, 135, 0.4)",
-                  },
-                  {
-                    offset: 0.8,
-                    color: "rgba(0, 216, 135, 0.1)",
-                  },
-                ],
-                false
-              ),
-              shadowColor: "rgba(0, 0, 0, 0.1)",
-            },
-          },
-          // 设置拐点 小圆点
-          symbol: "circle",
-          // 拐点大小
-          symbolSize: 5,
-          // 设置拐点颜色以及边框
-          itemStyle: {
-            color: "#00d887",
-            borderColor: "rgba(221, 220, 107, .1)",
-            borderWidth: 12,
-          },
-          // 开始不显示拐点， 鼠标经过显示
-          showSymbol: false,
-          data: [
-            130, 10, 20, 40, 30, 40, 80, 60, 20, 40, 90, 40, 20, 140, 30, 40,
-            130, 20, 20, 40, 80, 70, 30, 40, 30, 120, 20, 99, 50, 20,
-          ],
-        },
-      ],
-    };
-    myChart.setOption(option);
-    // 4. 让图表跟随屏幕自动的去适应
-    window.addEventListener("resize", function () {
-      myChart.resize();
-    });
-  }
   // 饼形图1
   function func5() {
     var data = {};
@@ -638,6 +304,8 @@ var dataArray; // 声明为全局变量
         ? `${params.low}-${params.high}`
         : `${params.low}-`;
     };
+    // qujians={low:区间左端点,high:区间右端点} 
+    // [low,high)左闭右开区间
     for (var i = 0; i < dataArray.length; i++) {
       var entry = dataArray[i];
       var value = entry[NAME];
@@ -974,30 +642,6 @@ var dataArray; // 声明为全局变量
     }
     console.log(newSeries);
 
-    // var XAData = [
-    //   [{ name: "西安" }, { name: "拉萨", value: 100 }],
-    //   [{ name: "西安" }, { name: "上海", value: 100 }],
-    //   [{ name: "西安" }, { name: "广州", value: 100 }],
-    //   [{ name: "西安" }, { name: "西宁", value: 100 }],
-    //   [{ name: "西安" }, { name: "银川", value: 100 }],
-    // ];
-
-    // var XNData = [
-    //   [{ name: "西宁" }, { name: "北京", value: 100 }],
-    //   [{ name: "西宁" }, { name: "上海", value: 100 }],
-    //   [{ name: "西宁" }, { name: "广州", value: 100 }],
-    //   [{ name: "西宁" }, { name: "西安", value: 100 }],
-    //   [{ name: "西宁" }, { name: "银川", value: 100 }],
-    // ];
-
-    // var YCData = [
-    //   [{ name: "拉萨" }, { name: "潍坊", value: 100 }],
-    //   [{ name: "拉萨" }, { name: "哈尔滨", value: 100 }],
-    //   [{ name: "银川" }, { name: "上海", value: 100 }],
-    //   [{ name: "银川" }, { name: "西安", value: 100 }],
-    //   [{ name: "银川" }, { name: "西宁", value: 100 }],
-    // ];
-
     var planePath =
       "path://M1705.06,1318.313v-89.254l-319.9-221.799l0.073-208.063c0.521-84.662-26.629-121.796-63.961-121.491c-37.332-0.305-64.482,36.829-63.961,121.491l0.073,208.063l-319.9,221.799v89.254l330.343-157.288l12.238,241.308l-134.449,92.931l0.531,42.034l175.125-42.917l175.125,42.917l0.531-42.034l-134.449-92.931l12.238-241.308L1705.06,1318.313z";
     // var planePath = 'arrow';
@@ -1123,14 +767,6 @@ var dataArray; // 声明为全局变量
       },
       legend: {
         show:false,
-        // orient: "vertical",
-        // top: "bottom",
-        // left: "right",
-        // data: ["西安 Top3", "西宁 Top3", "银川 Top3"],
-        // textStyle: {
-        //   color: "#fff",
-        // },
-        // selectedMode: "multiple",
       },
       geo: {
         map: "china",
